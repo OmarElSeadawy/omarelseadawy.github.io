@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research — Omar ElSeadawy</title>
+<meta name="description" content="Mixed-Criticality Scheduling Using Reinforcement Learning — MSc thesis by Omar ElSeadawy, AUC 2023.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-name">Omar ElSeadawy</a>
+  <ul class="tabs">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="research.html" class="active">Research</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+<hr class="rule">
+
+<main>
+  <p class="eyebrow">MSc Thesis · The American University in Cairo · 2023</p>
+  <h1>Mixed-Criticality Scheduling Using Reinforcement Learning</h1>
+  <p class="meta">Supervised by Dr. Nouri Sakr · Master of Science in Computer Science</p>
+
+  <div class="section">
+    <h2>The problem</h2>
+    <p>
+      Mixed-criticality systems run jobs of different safety importance on shared
+      hardware — the setup behind automotive and avionics safety standards like
+      ISO 26262 and DO-178B. The hard version of this problem is <em>online</em>:
+      the scheduler only knows about jobs that have already arrived, the processor's
+      speed can degrade unpredictably, and once a job starts running it can't be
+      paused. That combination is provably NP-hard, and prior work had mostly solved
+      easier versions — offline, preemptive, or with simplified degradation models.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>My approach</h2>
+    <p>
+      I tackled the online, non-preemptive, varying-speed version directly, using
+      deep reinforcement learning instead of classical scheduling policies. I built
+      a custom Gym environment and reward function, then trained and compared four
+      algorithms — a custom Ape-X DQN, plain DQN, PPO, and Augmented Random Search —
+      across thousands of generated job instances with randomized load, criticality
+      mix, and degradation risk.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>Results</h2>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-value">95.1%</div>
+        <div class="stat-label">Avg. completion (Ape-X DQN)</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">96%</div>
+        <div class="stat-label">Avg. completion (preemptive variant)</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">4</div>
+        <div class="stat-label">RL algorithms benchmarked</div>
+      </div>
+    </div>
+    <p>
+      The custom Ape-X agent scheduled sets of 50 jobs correctly 95.1% of the time
+      on average, staying above 90% even under the heaviest, most degradation-prone
+      workloads — without ever seeing the full future job sequence in advance. It
+      outperformed standard DQN (93%), Augmented Random Search (83%), and PPO (79%)
+      on the same benchmarks. A preemptive variant of the same agent pushed average
+      completion to 96%.
+    </p>
+    <p>
+      To the best of my knowledge, this is the first reinforcement-learning scheduler
+      evaluated on the online, non-preemptive, varying-speed mixed-criticality problem.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>Tools</h2>
+    <p class="skills-line">RLlib / Ray · Custom OpenAI Gym environment · Ape-X DQN · PPO · Markov Decision Processes · Python</p>
+  </div>
+
+  <p><a href="https://fount.aucegypt.edu/etds/2076" target="_blank" rel="noopener">Read the full thesis on AUC Knowledge Fountain →</a></p>
+</main>
+
+<footer>
+  <p>Omar ElSeadawy</p>
+</footer>
+
+</body>
+</html>
